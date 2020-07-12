@@ -1,7 +1,7 @@
 package com.elm.messages;
 
 import com.elm.controller.MessageController;
-import com.elm.gui.errorUI;
+import com.elm.controller.UIController;
 
 public class Email extends Message{
 
@@ -49,7 +49,7 @@ public class Email extends Message{
         MessageController msg = new MessageController();
         //check subject & body length
         if (this.subject.length() > this.subjectLength || this.body.length() > this.bodyLength) {
-            errorUI error = new errorUI();
+            UIController error = new UIController();
             error.displayError("Your message has an invalid length");
         }
 
