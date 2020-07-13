@@ -10,7 +10,6 @@ public class Tweet extends Message{
 
     public void processTweet(String type,String sender,String subject,String body, String id) {
 
-
         this.sender = sender;
         this.subject = subject;
         this.body = body;
@@ -22,6 +21,8 @@ public class Tweet extends Message{
         }
 
         this.handleTextSpeak();
+        this.addToMentionsList();
+        this.addToTrendingList();
         this.handleDisplay();
     }
 
