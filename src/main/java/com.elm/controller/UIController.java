@@ -78,7 +78,9 @@ public class UIController implements Initializable {
 
         displayMessageID.setText("Message ID: \n" + messageID);
         displaySender.setText("\nSender: \n" + sender);
-        displaySubject.setText("\nSubject: \n" + subject);
+        if (subject != null){
+            displaySubject.setText("\nSubject: \n" + subject);
+        }
         displayBody.setText("\nBody: \n" + body);
         if (emailType != null){
             displayEmailType.setText("\nEmail Type: \n" + emailType);
@@ -90,7 +92,7 @@ public class UIController implements Initializable {
         box.getChildren().add(displayBody);
         box.getChildren().add(displayEmailType);
 
-        Scene scene = new Scene(box, 550, 850);
+        Scene scene = new Scene(box, 1250, 350);
         stage.setScene(scene);
         stage.show();
     }

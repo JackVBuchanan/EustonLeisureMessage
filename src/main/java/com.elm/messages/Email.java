@@ -24,7 +24,9 @@ public class Email extends Message{
             this.emailType = "standard";
         }
 
-        isValid();
+        if(!isValid()){
+            return;
+        }
 
         this.filterURL();
         this.handleDisplay();
@@ -47,19 +49,20 @@ public class Email extends Message{
             }
         }
         this.body = String.join(" ", bodyArray);
-
     }
 
 
 
-    private void isValid() {
+    private boolean isValid() {
 
         MessageController msg = new MessageController();
         //check subject & body length
         if (this.subject.length() > this.subjectLength || this.body.length() > this.bodyLength) {
             UIController error = new UIController();
             error.displayError("Your message has an invalid length");
+            return false;
         }
         //TODO check for valid email and messageID
+        return true;
     }
 }

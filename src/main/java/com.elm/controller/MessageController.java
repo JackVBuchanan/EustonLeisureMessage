@@ -17,7 +17,7 @@ public class MessageController {
             tweet.processTweet(type,sender,subject,body,id);
         }else if(type.equals("text")){
             Text text = new Text();
-            text.processMessage(type,sender,subject,body,id);
+            text.processText(type,sender,subject,body,id);
         }
     }
 
