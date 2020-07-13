@@ -27,7 +27,15 @@ public class Email extends Message{
         isValid();
 
         this.filterURL();
+        this.handleDisplay();
     }
+
+    @Override
+    protected void handleDisplay() {
+        UIController ui = new UIController();
+        ui.displayMessage(this.messageID, this.sender, this.subject, this.body, this.emailType);
+    }
+
 
     private void filterURL() {
         String[] bodyArray = this.body.split(" ");
