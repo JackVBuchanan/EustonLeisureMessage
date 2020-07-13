@@ -30,6 +30,7 @@ public class Email extends Message{
         this.handleDisplay();
     }
 
+    @Override
     protected void handleDisplay() {
         UIController ui = new UIController();
         ui.displayMessage(this.messageID, this.sender, this.subject, this.body, this.emailType);

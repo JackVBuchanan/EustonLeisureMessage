@@ -13,7 +13,7 @@ public class Message {
     protected String type;
 
 
-    public void processMessage(String subject, String body){
+    public void processMessage(String type,String sender,String subject,String body, String id){
         System.out.println("Here!");
     }
 
