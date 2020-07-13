@@ -60,13 +60,6 @@ public class Email extends Message{
             UIController error = new UIController();
             error.displayError("Your message has an invalid length");
         }
-
-
-
         //TODO check for valid email and messageID
-
-
     }
-
-
 }

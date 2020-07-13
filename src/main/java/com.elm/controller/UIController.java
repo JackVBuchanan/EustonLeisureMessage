@@ -46,7 +46,7 @@ public class UIController implements Initializable {
         if (type.equals("invalid")) {
             label.setText("Invalid message, please try again");
         } else {
-            MessageController.handleMessage(type, subject, body, sender, id);
+            MessageController.handleMessage(type, sender, subject, body, id);
         }
 
         messageID.setText("");
@@ -90,7 +90,7 @@ public class UIController implements Initializable {
         box.getChildren().add(displayBody);
         box.getChildren().add(displayEmailType);
 
-        Scene scene = new Scene(box, 550, 450);
+        Scene scene = new Scene(box, 550, 850);
         stage.setScene(scene);
         stage.show();
     }

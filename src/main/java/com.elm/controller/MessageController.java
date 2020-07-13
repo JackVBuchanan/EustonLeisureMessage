@@ -6,7 +6,7 @@ import com.elm.messages.Tweet;
 
 public class MessageController {
 
-    public static void handleMessage(String type, String subject, String body, String sender, String id){
+    public static void handleMessage(String type,String sender,String subject,String body, String id){
 
         //would have preferred to user
         if(type.equals("email")){
@@ -14,10 +14,10 @@ public class MessageController {
             email.processEmail(type,sender,subject,body,id);
         }else if(type.equals("tweet")){
             Tweet tweet = new Tweet();
-            tweet.processMessage(subject, body);
+            tweet.processTweet(type,sender,subject,body,id);
         }else if(type.equals("text")){
             Text text = new Text();
-            text.processMessage(subject, body);
+            text.processMessage(type,sender,subject,body,id);
         }
     }
 
