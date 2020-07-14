@@ -22,6 +22,7 @@ public class Text extends Message{
         this.handleTextSpeak();
         this.addToMentionsList();
         this.addToTrendingList();
+        this.formatJSON();
         this.handleDisplay();
     }
 

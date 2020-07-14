@@ -1,10 +1,8 @@
 package com.elm.messages;
 
 import com.elm.controller.UIController;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -129,5 +127,24 @@ public class Message {
     protected void handleDisplay() {
         UIController ui = new UIController();
         ui.displayMessage(this.messageID, this.sender, this.subject, this.body, null);
+    }
+
+    public void formatJSON(){
+
+        String bodyJSON = "{\"message\": [" +
+                "{\"messageid\": \"" + this.messageID + "\", " +
+                "\"sender\": \"" + this.sender + "\", " +
+                "\"subject\": \"" + this.subject + "\", " +
+                "\"body\": \"" + this.body + "\"}]}";
+
+        String home = System.getProperty("user.home");
+        File messageJSON = new File(home+"/Downloads/message.json");
+        try {
+            FileWriter myWriter = new FileWriter(home+"/Downloads/message.json");
+            myWriter.write(bodyJSON);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
