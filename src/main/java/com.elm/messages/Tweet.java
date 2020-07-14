@@ -6,7 +6,6 @@ public class Tweet extends Message{
 
     protected short bodyLength = 140;
     public short senderLength = 16;
-    protected String messageType = "tweet";
 
     public void processTweet(String type,String sender,String subject,String body, String id) {
 
@@ -43,9 +42,4 @@ public class Tweet extends Message{
         }
         return true;
     }
-
-
-
-
-
 }
