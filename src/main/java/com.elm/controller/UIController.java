@@ -78,10 +78,14 @@ public class UIController implements Initializable {
 
         displayMessageID.setText("Message ID: \n" + messageID);
         displaySender.setText("\nSender: \n" + sender);
-        if (subject != null){
+
+        if (!subject.equals("")){
             displaySubject.setText("\nSubject: \n" + subject);
         }
+
+        displayBody.setWrapText(true);
         displayBody.setText("\nBody: \n" + body);
+
         if (emailType != null){
             displayEmailType.setText("\nEmail Type: \n" + emailType);
         }

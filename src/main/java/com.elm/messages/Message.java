@@ -15,10 +15,7 @@ public class Message {
     protected String sender;
     protected String subject;
     protected String body;
-    protected int subjectLength = 10;
-    protected String bodyLength;
     protected String type;
-
 
     public void processMessage(String type,String sender,String subject,String body, String id){
         System.out.println("Here!");

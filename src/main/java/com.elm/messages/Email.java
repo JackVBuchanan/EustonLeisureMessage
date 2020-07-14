@@ -1,14 +1,10 @@
 package com.elm.messages;
 
-import com.elm.controller.MessageController;
 import com.elm.controller.UIController;
 
 public class Email extends Message{
 
-    protected short bodyLength = 1028;
-    protected String messageType = "email";
     protected String emailType;
-    private String StringUtils;
 
     public void processEmail(String type,String sender,String subject,String body, String id) {
 
@@ -55,9 +51,8 @@ public class Email extends Message{
 
     private boolean isValid() {
 
-        MessageController msg = new MessageController();
         //check subject & body length
-        if (this.subject.length() > this.subjectLength || this.body.length() > this.bodyLength) {
+        if (this.subject.length() > 20 || this.body.length() > 1028) {
             UIController error = new UIController();
             error.displayError("Your message has an invalid length");
             return false;
