@@ -2,6 +2,9 @@ package com.elm.messages;
 
 import com.elm.controller.UIController;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class Email extends Message{
 
     protected String emailType;
@@ -22,6 +25,10 @@ public class Email extends Message{
 
         if(!isValid()){
             return;
+        }
+
+        if(this.emailType.equals("incident")){
+            this.handleIncidentReport();
         }
 
         this.filterURL();
@@ -59,5 +66,29 @@ public class Email extends Message{
         }
         //TODO check for valid email and messageID
         return true;
+    }
+
+    private void handleIncidentReport(){
+
+        var split = this.body.split("\n");
+        String incident = "Incident Date: " + this.subject.substring(4) + "\n" + split[0] + "\n" + split[1] + "\n";
+
+        this.addToIncidentReport(incident);
+    }
+
+    private void addToIncidentReport(String incident){
+
+        String basePath = System.getProperty("user.dir");
+        basePath = basePath.split("ELM")[0];
+
+        try {
+            FileWriter writer = new FileWriter(basePath + "ELM/src/main/resources/incidentReport.txt", true);
+            writer.write(System.getProperty( "line.separator" ));
+            writer.write(incident);
+            writer.close();
+            System.out.println("Write was successful");
+        } catch (IOException e) {
+            System.out.println("ERROR");
+        }
     }
 }
