@@ -1,14 +1,16 @@
 package com.elm.controller;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.net.URL;
@@ -21,6 +23,9 @@ public class UIController implements Initializable {
 
     @FXML
     public Button button;
+
+    @FXML
+    public Button shutDownButton;
 
     @FXML
     private Label label;
@@ -69,6 +74,7 @@ public class UIController implements Initializable {
         //Create new pop up to show formatted message
         Stage stage = new Stage();
         VBox box = new VBox();
+        stage.setTitle("Euston Leisure");
 
         Label displayMessageID = new Label();
         Label displaySender = new Label();
@@ -97,6 +103,59 @@ public class UIController implements Initializable {
         box.getChildren().add(displayEmailType);
 
         Scene scene = new Scene(box, 1250, 350);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void shutdown(ActionEvent event) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+
+        MessageController msgController = new MessageController();
+
+        String incidentReport = msgController.getIncidentReport();
+        String mentionsList = msgController.getMentionsList();
+        String trendingList = msgController.getTrendingList();
+
+        this.displayShutdownList(incidentReport, mentionsList, trendingList);
+        Stage stage = (Stage) shutDownButton.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    public void displayShutdownList(String incidentReport, String mentionsList, String trendingList) {
+
+        Stage stage = new Stage();
+        VBox box = new VBox();
+        GridPane grid = new GridPane();
+        stage.setTitle("Euston Leisure");
+
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(10);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(30);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(30);
+        grid.getColumnConstraints().addAll(col1,col2,col3);
+
+        Label firstLabel=new Label("--- Incident Report ---\n");
+        Label secondLabel=new Label("--- Mention List ---\n");
+        Label thirdLabel=new Label("--- Trending List ---\n");
+
+        Label incidentReportLabel=new Label(incidentReport);
+        Label mentionsListLabel=new Label(mentionsList);
+        Label trendingListLabel=new Label(trendingList);
+
+
+        grid.add(firstLabel, 1, 0);
+        grid.add(secondLabel, 2,0);
+        grid.add(thirdLabel, 3, 0);
+
+        grid.add(incidentReportLabel, 1, 1);
+        grid.add(mentionsListLabel, 2,1);
+        grid.add(trendingListLabel, 3, 1);
+
+        box.getChildren().add(grid);
+        Scene scene = new Scene(box, 1250, 1000);
         stage.setScene(scene);
         stage.show();
     }

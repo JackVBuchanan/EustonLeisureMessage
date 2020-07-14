@@ -9,7 +9,7 @@
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <children>
 
-        <Text text="Welcome" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+        <Text text="Welcome to Euston Leisure" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
 
         <Label text="MessageID:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" maxHeight="40.0" maxWidth="350.0" minHeight="40.0" minWidth="350.0" fx:id="messageID"/>
@@ -17,17 +17,16 @@
         <Label text="Sender:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" maxHeight="40.0" maxWidth="350.0" minHeight="40.0" minWidth="350.0" fx:id="senderField"/>
 
-
         <Label text="Subject:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" maxHeight="40.0" maxWidth="350.0" minHeight="40.0" minWidth="350.0" fx:id="subjectField"/>
-
 
         <Label text="Body:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
         <TextArea GridPane.columnIndex="1" GridPane.rowIndex="4" maxHeight="300.0" maxWidth="350.0" minHeight="300.0" minWidth="350.0" fx:id="bodyField"/>
 
-
-        <Button GridPane.columnIndex="0" GridPane.rowIndex="5" text="Click Me!" onAction="#submitMessage" fx:id="button" />
+        <Button GridPane.columnIndex="1" GridPane.rowIndex="5" text="Submit Message" onAction="#submitMessage" fx:id="button" />
         <Label fx:id="label" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <Button GridPane.columnIndex="0" GridPane.rowIndex="7" text="Shutdown" onAction="#shutdown" fx:id="shutDownButton" />
 
     </children>
 </GridPane>
