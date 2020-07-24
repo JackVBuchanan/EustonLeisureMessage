@@ -32,6 +32,7 @@ public class Email extends Message{
         }
 
         this.filterURL();
+        this.formatJSON();
         this.handleDisplay();
     }
 

@@ -21,7 +21,7 @@
         <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" maxHeight="40.0" maxWidth="350.0" minHeight="40.0" minWidth="350.0" fx:id="subjectField"/>
 
         <Label text="Body:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-        <TextArea GridPane.columnIndex="1" GridPane.rowIndex="4" maxHeight="300.0" maxWidth="350.0" minHeight="300.0" minWidth="350.0" fx:id="bodyField"/>
+        <TextArea GridPane.columnIndex="1" GridPane.rowIndex="4" wrapText="true" maxHeight="300.0" maxWidth="350.0" minHeight="300.0" minWidth="350.0" fx:id="bodyField"/>
 
         <Button GridPane.columnIndex="1" GridPane.rowIndex="5" text="Submit Message" onAction="#submitMessage" fx:id="button" />
         <Label fx:id="label" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
