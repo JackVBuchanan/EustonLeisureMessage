@@ -1,7 +1,6 @@
 package com.elm.messages;
 
 import com.elm.controller.UIController;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,11 +14,10 @@ public class Message {
     protected String body;
     protected String type;
 
-    public void processMessage(String type,String sender,String subject,String body, String id){
-        System.out.println("Here!");
-    }
-
-    protected void addToTrendingList(){
+    /**
+     * Loop through body to find hashtags and add to arrayList
+     */
+    protected void addToTrendingList() {
 
         String[] bodyArray = this.body.split(" ");
         ArrayList<String> trendingList = new ArrayList<>();
@@ -27,14 +25,17 @@ public class Message {
         int j = 0;
         for (int i = 0; i < bodyArray.length; i++) {
             if (bodyArray[i].charAt(0) == '#') {
-                trendingList.add(j,bodyArray[i]);
+                trendingList.add(j, bodyArray[i]);
                 j++;
             }
         }
         saveTrendingList(trendingList);
     }
 
-    private void saveTrendingList(ArrayList<String> trendingList){
+    /**
+     * Write all hashtags from body to file for display on shutdown
+     */
+    private void saveTrendingList(ArrayList<String> trendingList) {
 
         String basePath = System.getProperty("user.dir");
         basePath = basePath.split("ELM")[0];
@@ -42,7 +43,7 @@ public class Message {
         try {
             FileWriter writer = new FileWriter(basePath + "ELM/src/main/resources/trendingList.txt", true);
             for (int i = 0; i < trendingList.size(); i++) {
-                writer.write(System.getProperty( "line.separator" ));
+                writer.write(System.getProperty("line.separator"));
                 writer.write(trendingList.get(i));
             }
             writer.close();
@@ -52,8 +53,10 @@ public class Message {
         }
     }
 
-
-    protected void addToMentionsList(){
+    /**
+     * Loop through body to find mentions and add to arrayList
+     */
+    protected void addToMentionsList() {
 
         String[] bodyArray = this.body.split(" ");
         ArrayList<String> mentionsList = new ArrayList<>();
@@ -61,14 +64,17 @@ public class Message {
         int j = 0;
         for (int i = 0; i < bodyArray.length; i++) {
             if (bodyArray[i].charAt(0) == '@') {
-                mentionsList.add(j,bodyArray[i]);
+                mentionsList.add(j, bodyArray[i]);
                 j++;
             }
         }
         saveMentionsList(mentionsList);
     }
 
-    private void saveMentionsList(ArrayList<String> mentionsList){
+    /**
+     * Write all mentions from body to file for display on shutdown
+     */
+    private void saveMentionsList(ArrayList<String> mentionsList) {
 
         String basePath = System.getProperty("user.dir");
         basePath = basePath.split("ELM")[0];
@@ -76,7 +82,7 @@ public class Message {
         try {
             FileWriter writer = new FileWriter(basePath + "ELM/src/main/resources/mentionsList.txt", true);
             for (int i = 0; i < mentionsList.size(); i++) {
-                writer.write(System.getProperty( "line.separator" ));
+                writer.write(System.getProperty("line.separator"));
                 writer.write(mentionsList.get(i));
             }
             writer.close();
@@ -86,6 +92,9 @@ public class Message {
         }
     }
 
+    /**
+     * Takes message body and appends full textspeak abbreviations
+     */
     protected void handleTextSpeak() {
 
         String[] body = this.body.split(" ");
@@ -129,7 +138,11 @@ public class Message {
         ui.displayMessage(this.messageID, this.sender, this.subject, this.body, null);
     }
 
-    public void formatJSON(){
+    /**
+     * Message body converted to JSON format at written to text
+     * file in downloads folder
+     */
+    public void formatJSON() {
 
         String bodyJSON = "{\"message\": [" +
                 "{\"messageid\": \"" + this.messageID + "\", " +
@@ -138,9 +151,9 @@ public class Message {
                 "\"body\": \"" + this.body + "\"}]}";
 
         String home = System.getProperty("user.home");
-        File messageJSON = new File(home+"/Downloads/message.json");
+        File messageJSON = new File(home + "/Downloads/message.json");
         try {
-            FileWriter myWriter = new FileWriter(home+"/Downloads/message.json");
+            FileWriter myWriter = new FileWriter(home + "/Downloads/message.json");
             myWriter.write(bodyJSON);
             myWriter.close();
         } catch (IOException e) {

@@ -1,15 +1,14 @@
 package com.elm.messages;
 
 import com.elm.controller.UIController;
-
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Email extends Message{
+public class Email extends Message {
 
     protected String emailType;
 
-    public void processEmail(String type,String sender,String subject,String body, String id) {
+    public void processEmail(String type, String sender, String subject, String body, String id) {
 
         this.sender = sender;
         this.subject = subject;
@@ -17,17 +16,18 @@ public class Email extends Message{
         this.type = type;
         this.messageID = id;
 
-        if(subject.startsWith("SIR")){
+        // Identify subtype
+        if (subject.startsWith("SIR")) {
             this.emailType = "incident";
-        }else{
+        } else {
             this.emailType = "standard";
         }
 
-        if(!isValid()){
+        if (!isValid()) {
             return;
         }
 
-        if(this.emailType.equals("incident")){
+        if (this.emailType.equals("incident")) {
             this.handleIncidentReport();
         }
 
@@ -42,20 +42,20 @@ public class Email extends Message{
         ui.displayMessage(this.messageID, this.sender, this.subject, this.body, this.emailType);
     }
 
-
+    /**
+     * Replace URLs in body with <URL Quarantined>
+     */
     private void filterURL() {
         String[] bodyArray = this.body.split(" ");
 
-        for(int i = 0; i < bodyArray.length; i++){
+        for (int i = 0; i < bodyArray.length; i++) {
 
-            if (bodyArray[i].contains("http")){
+            if (bodyArray[i].contains("http")) {
                 bodyArray[i] = "<URL Quarantined>";
             }
         }
         this.body = String.join(" ", bodyArray);
     }
-
-
 
     private boolean isValid() {
 
@@ -69,7 +69,7 @@ public class Email extends Message{
         return true;
     }
 
-    private void handleIncidentReport(){
+    private void handleIncidentReport() {
 
         var split = this.body.split("\n");
         String incident = "Incident Date: " + this.subject.substring(4) + "\n" + split[0] + "\n" + split[1] + "\n";
@@ -77,14 +77,17 @@ public class Email extends Message{
         this.addToIncidentReport(incident);
     }
 
-    private void addToIncidentReport(String incident){
+    /**
+     * Write incident report to file for display on shutdown
+     */
+    private void addToIncidentReport(String incident) {
 
         String basePath = System.getProperty("user.dir");
         basePath = basePath.split("ELM")[0];
 
         try {
             FileWriter writer = new FileWriter(basePath + "ELM/src/main/resources/incidentReport.txt", true);
-            writer.write(System.getProperty( "line.separator" ));
+            writer.write(System.getProperty("line.separator"));
             writer.write(incident);
             writer.close();
             System.out.println("Write was successful");

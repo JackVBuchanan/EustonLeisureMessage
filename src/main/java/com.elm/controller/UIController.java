@@ -1,8 +1,5 @@
 package com.elm.controller;
 
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.net.URL;
@@ -85,17 +81,17 @@ public class UIController implements Initializable {
         displayMessageID.setText("Message ID: \n" + messageID);
         displaySender.setText("\nSender: \n" + sender);
 
-        if (!subject.equals("")){
+        if (!subject.equals("")) {
             displaySubject.setText("\nSubject: \n" + subject);
         }
 
         displayBody.setWrapText(true);
         displayBody.setText("\nBody: \n" + body);
 
-        if (emailType != null){
+        if (emailType != null) {
             displayEmailType.setText("\nEmail Type: \n" + emailType);
         }
-
+        // Add labels to box
         box.getChildren().add(displayMessageID);
         box.getChildren().add(displaySender);
         box.getChildren().add(displaySubject);
@@ -116,6 +112,7 @@ public class UIController implements Initializable {
         String mentionsList = msgController.getMentionsList();
         String trendingList = msgController.getTrendingList();
 
+        // Display list read from text file
         this.displayShutdownList(incidentReport, mentionsList, trendingList);
         Stage stage = (Stage) shutDownButton.getScene().getWindow();
         stage.close();
@@ -129,29 +126,29 @@ public class UIController implements Initializable {
         GridPane grid = new GridPane();
         stage.setTitle("Euston Leisure");
 
+        // Set 3 columns for each list
         ColumnConstraints col1 = new ColumnConstraints();
         col1.setPercentWidth(10);
         ColumnConstraints col2 = new ColumnConstraints();
         col2.setPercentWidth(30);
         ColumnConstraints col3 = new ColumnConstraints();
         col3.setPercentWidth(30);
-        grid.getColumnConstraints().addAll(col1,col2,col3);
+        grid.getColumnConstraints().addAll(col1, col2, col3);
 
-        Label firstLabel=new Label("--- Incident Report ---\n");
-        Label secondLabel=new Label("--- Mention List ---\n");
-        Label thirdLabel=new Label("--- Trending List ---\n");
+        Label firstLabel = new Label("--- Incident Report ---\n");
+        Label secondLabel = new Label("--- Mention List ---\n");
+        Label thirdLabel = new Label("--- Trending List ---\n");
 
-        Label incidentReportLabel=new Label(incidentReport);
-        Label mentionsListLabel=new Label(mentionsList);
-        Label trendingListLabel=new Label(trendingList);
-
+        Label incidentReportLabel = new Label(incidentReport);
+        Label mentionsListLabel = new Label(mentionsList);
+        Label trendingListLabel = new Label(trendingList);
 
         grid.add(firstLabel, 1, 0);
-        grid.add(secondLabel, 2,0);
+        grid.add(secondLabel, 2, 0);
         grid.add(thirdLabel, 3, 0);
 
         grid.add(incidentReportLabel, 1, 1);
-        grid.add(mentionsListLabel, 2,1);
+        grid.add(mentionsListLabel, 2, 1);
         grid.add(trendingListLabel, 3, 1);
 
         box.getChildren().add(grid);
@@ -159,7 +156,6 @@ public class UIController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

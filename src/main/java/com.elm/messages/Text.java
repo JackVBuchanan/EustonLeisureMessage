@@ -2,12 +2,11 @@ package com.elm.messages;
 
 import com.elm.controller.UIController;
 
-public class Text extends Message{
+public class Text extends Message {
 
     protected short bodyLength = 140;
-    protected String messageType = "text";
 
-    public void processText(String type,String sender,String subject,String body, String id){
+    public void processText(String type, String sender, String subject, String body, String id) {
 
         this.sender = sender;
         this.subject = subject;
@@ -15,7 +14,7 @@ public class Text extends Message{
         this.type = type;
         this.messageID = id;
 
-        if(!isValid()){
+        if (!isValid()) {
             return;
         }
 
@@ -43,5 +42,4 @@ public class Text extends Message{
         }
         return true;
     }
-
 }
