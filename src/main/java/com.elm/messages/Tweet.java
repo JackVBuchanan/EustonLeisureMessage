@@ -2,12 +2,12 @@ package com.elm.messages;
 
 import com.elm.controller.UIController;
 
-public class Tweet extends Message{
+public class Tweet extends Message {
 
     protected short bodyLength = 140;
     public short senderLength = 16;
 
-    public void processTweet(String type,String sender,String subject,String body, String id) {
+    public void processTweet(String type, String sender, String subject, String body, String id) {
 
         this.sender = sender;
         this.subject = subject;
@@ -15,7 +15,7 @@ public class Tweet extends Message{
         this.type = type;
         this.messageID = id;
 
-        if(!isValid()){
+        if (!isValid()) {
             return;
         }
 

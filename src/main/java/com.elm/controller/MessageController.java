@@ -10,26 +10,32 @@ import java.util.ArrayList;
 
 public class MessageController {
 
-    public static void handleMessage(String type,String sender,String subject,String body, String id){
+    public static void handleMessage(String type, String sender, String subject, String body, String id) {
 
         //would have preferred to user
-        if(type.equals("email")){
+        if (type.equals("email")) {
             Email email = new Email();
-            email.processEmail(type,sender,subject,body,id);
-        }else if(type.equals("tweet")){
+            email.processEmail(type, sender, subject, body, id);
+        } else if (type.equals("tweet")) {
             Tweet tweet = new Tweet();
-            tweet.processTweet(type,sender,subject,body,id);
-        }else if(type.equals("text")){
+            tweet.processTweet(type, sender, subject, body, id);
+        } else if (type.equals("text")) {
             Text text = new Text();
-            text.processText(type,sender,subject,body,id);
+            text.processText(type, sender, subject, body, id);
         }
     }
 
-    static String getType(String messageID){
+    /**
+     * Takes message body and appends full textspeak abbreviations
+     *
+     * @param messageID - ID of message that contains type
+     * @return messageType - message type returned
+     */
+    static String getType(String messageID) {
 
         char type = messageID.charAt(0);
         String messageType = "Undefined";
-        switch(type){
+        switch (type) {
             case 'E':
                 messageType = "email";
                 break;
@@ -47,7 +53,10 @@ public class MessageController {
         return messageType;
     }
 
-    public String getTrendingList(){
+    /**
+     * Read from trending list to display on shutdown
+     */
+    public String getTrendingList() {
 
         String trendingList = "";
         ArrayList<String> trendingListArray = new ArrayList<>();
@@ -67,14 +76,17 @@ public class MessageController {
         }
 
         for (int i = 0; i < trendingListArray.size(); i++) {
-            if(!trendingList.contains(trendingListArray.get(i))){
+            if (!trendingList.contains(trendingListArray.get(i))) {
                 trendingList = trendingList.concat(trendingListArray.get(i)) + "\n";
             }
         }
         return trendingList;
     }
 
-    public String getIncidentReport(){
+    /**
+     * Read from incident report list to display on shutdown
+     */
+    public String getIncidentReport() {
 
         ArrayList<String> incidentReportArray = new ArrayList<>();
 
@@ -102,7 +114,10 @@ public class MessageController {
         return incidentReport;
     }
 
-    public String getMentionsList(){
+    /**
+     * Read from mentions list to display on shutdown
+     */
+    public String getMentionsList() {
 
         String mentionsList = "";
 
@@ -123,7 +138,7 @@ public class MessageController {
         }
 
         for (int i = 0; i < trendingListArray.size(); i++) {
-            if(!mentionsList.contains(trendingListArray.get(i))){
+            if (!mentionsList.contains(trendingListArray.get(i))) {
                 mentionsList = mentionsList.concat(trendingListArray.get(i)) + "\n";
             }
         }
